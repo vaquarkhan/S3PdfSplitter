@@ -30,3 +30,5 @@ jobs:
       user: Nydareld
       password:
         secure: SUNuHmkFI0nXSXnsnDuPl4FWAKDwd0/eWCmn0I96aj6s99jStuvPFEg0N/H33EEJX5HKgIjtjWeGixVQXzOZEALtAZx/Q8lmxR3iyIy4maEZ1DN9vL1ZSlJTGOKudQALx4vGpFImVOHLQj29NpqGZpXixzujQDJkhwiMLaNIDNpc9iY6y1e+ofmYd2JnBZ+dnFphO8a6526KdOd1mF8DoLZRBnAUTa6BEWROM9WEbE49BtIhGKL9xyJVr1lv3UY+4q3gtoVpK/X1ahnzZ3cvRzQyT4h1A/zxATEXmioo/hBO7+aq6gLStFvGc/eyAzYul3sWU/hs5AD5xOg4S9YH/GM0PhsQQglm7PjRr9l4lR1iYUnnM6kzB9Y3spn5H3Iziiq5+ff0m+eoxKgFdLEPcQNb4EgTYT4BX3qE4MqCBWivcPizWr86CAlCB0gWZaFWAWP02FDtHWwqmEZxEb7YpQIhfSHsvYR9wuQWgNCWHhecmpjCuJPSTvbs8lbbrbSQldewnvzH0d7ChXZSKNvhSgWptAi/J0+Ts5mFKnR3G4xq2j/hlRbrUe0F8LQlrUyhJjML+Y0wkPJ8fv+dL8DityWSMar3r8zcQulNaU4dKZMsGJg2gTNxPRg36lra2K0o760E9zuABfjp1uaouj1PcqDOI/GPixE2BMzdqw91R8M=
+      on:
+        tags: true
