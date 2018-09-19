@@ -1,6 +1,6 @@
-# S3PdfSplitter [![Build Status](https://travis-ci.org/Nydareld/S3PdfSplitter.svg?branch=master)](https://travis-ci.org/Nydareld/S3PdfSplitter) [![Coverage Status](https://coveralls.io/repos/github/Nydareld/S3PdfSplitter/badge.svg)](https://coveralls.io/github/Nydareld/S3PdfSplitter) ![PyPI version](https://badge.fury.io/py/S3PdfSplitter.svg)](https://badge.fury.io/py/S3PdfSplitter) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/S3PdfSplitter.svg)
+# S3PdfSplitter [![Build Status](https://travis-ci.org/Nydareld/S3PdfSplitter.svg?branch=master)](https://travis-ci.org/Nydareld/S3PdfSplitter) [![Coverage Status](https://coveralls.io/repos/github/Nydareld/S3PdfSplitter/badge.svg)](https://coveralls.io/github/Nydareld/S3PdfSplitter) [![PyPI version](https://badge.fury.io/py/S3PdfSplitter.svg)](https://badge.fury.io/py/S3PdfSplitter) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/S3PdfSplitter.svg)
 
-Python aws-s3 pdf spliter and recomposer
+Python aws-s3 pdf spliter
 
 ## Usage
 
@@ -17,7 +17,7 @@ exemple config.json :
 ```json
 {
     "aws" : {
-        "access_key_id" : "aws-acces-key",
+        "access_key_id" : "aws-acces-key",m
         "secret_access_key" : "aws secret",
         "s3" : {
             "bucket" : "bucket"
