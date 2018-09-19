@@ -17,7 +17,7 @@ exemple config.json :
 ```json
 {
     "aws" : {
-        "access_key_id" : "aws-acces-key",m
+        "access_key_id" : "aws-acces-key",
         "secret_access_key" : "aws secret",
         "s3" : {
             "bucket" : "bucket"

@@ -18,6 +18,7 @@ import unittest
 import boto3
 import json
 import warnings
+import io
 
 from PdfSplitter import Splitter
 
@@ -63,23 +64,23 @@ class TestSplitter(unittest.TestCase):
         writer = PdfFileWriter()
         writer.addPage(splitter._cachePage["letter.pdf"][1])
         writer.addPage(splitter._cachePage["letter.pdf"][2])
-        out = self.getCurrentPath()+"data/pdf/temp/out.pdf"
-        with open(out,"wb") as outputWriteStream:
-            writer.write(outputWriteStream)
-        with open(out,"rb") as outputReadStream:
-            self.assertEqual( self.pdfToStr( outputReadStream ) , [ "b\n","c\n" ] )
+
+        outputWriteStream = io.BytesIO()
+        writer.write(outputWriteStream)
+        outputWriteStream.seek(0)
+        self.assertEqual( self.pdfToStr( outputWriteStream ) , [ "b\n","c\n" ] )
+
 
     def test__getOnePage(self):
         splitter = Splitter(self.getCurrentPath()+"data/splitterConfig.json")
         page3 = splitter._getOnePage("letter.pdf",3)
-        out = self.getCurrentPath()+"data/pdf/temp/out.pdf"
         writer = PdfFileWriter()
         writer.addPage(page3)
-        with open(out,"wb") as outputWriteStream:
-            writer.write(outputWriteStream)
-        with open(out,"rb") as outputReadStream:
-            self.assertEqual( self.pdfToStr( outputReadStream ) , [ "d\n" ] )
 
+        outputWriteStream = io.BytesIO()
+        writer.write(outputWriteStream)
+        outputWriteStream.seek(0)
+        self.assertEqual( self.pdfToStr( outputWriteStream ) ,  [ "d\n" ] )
 
     def test__uploadToS3(self):
         splitter = Splitter(self.getCurrentPath()+"data/splitterConfig.json")
@@ -88,11 +89,10 @@ class TestSplitter(unittest.TestCase):
         writer.addPage(page3)
         splitter._uploadToS3(writer,"output.pdf")
 
-        out = self.getCurrentPath()+"data/pdf/temp/out.pdf"
-
-        self._bucket.download_file("output.pdf",out)
-        with open(out,"rb") as outputReadStream:
-            self.assertEqual( self.pdfToStr( outputReadStream ) , [ "c\n" ] )
+        outputWriteStream = io.BytesIO()
+        self._bucket.download_fileobj("output.pdf",outputWriteStream)
+        outputWriteStream.seek(0)
+        self.assertEqual( self.pdfToStr( outputWriteStream ) , [ "c\n" ] )
 
 
     def test__splitOnePdf(self):
@@ -101,10 +101,10 @@ class TestSplitter(unittest.TestCase):
             data= json.load(data)
         splitter._splitOnePdf(data["input"], data["output"][0])
 
-        out = self.getCurrentPath()+"data/pdf/temp/out.pdf"
-        self._bucket.download_file("outputab01.pdf",out)
-        with open(out,"rb") as outputReadStream:
-            self.assertEqual( self.pdfToStr( outputReadStream ) , [ "a\n","b\n","0\n","1\n" ] )
+        outputWriteStream = io.BytesIO()
+        self._bucket.download_fileobj("outputab01.pdf",outputWriteStream)
+        outputWriteStream.seek(0)
+        self.assertEqual( self.pdfToStr( outputWriteStream ) , [ "a\n","b\n","0\n","1\n" ] )
 
     def test_split(self):
         splitter = Splitter(self.getCurrentPath()+"data/splitterConfig.json")
@@ -112,14 +112,14 @@ class TestSplitter(unittest.TestCase):
             data= json.load(data)
         splitter.split(data)
 
-        out1 = self.getCurrentPath()+"data/pdf/temp/out1.pdf"
-        out2 = self.getCurrentPath()+"data/pdf/temp/out2.pdf"
-        self._bucket.download_file("outputab01.pdf",out1)
-        self._bucket.download_file("outputa0b1.pdf",out2)
-        with open(out1,"rb") as outputReadStream:
-            self.assertEqual( self.pdfToStr( outputReadStream ) , [ "a\n","b\n","0\n","1\n" ] )
-        with open(out2,"rb") as outputReadStream:
-            self.assertEqual( self.pdfToStr( outputReadStream ) , [ "a\n","0\n","b\n","1\n" ] )
+        out1 = io.BytesIO()
+        out2 = io.BytesIO()
+
+        self._bucket.download_fileobj("outputab01.pdf",out1)
+        self._bucket.download_fileobj("outputa0b1.pdf",out2)
+
+        self.assertEqual( self.pdfToStr( out1 ) , [ "a\n","b\n","0\n","1\n" ] )
+        self.assertEqual( self.pdfToStr( out2 ) , [ "a\n","0\n","b\n","1\n" ] )
 
 
 
