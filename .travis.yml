@@ -1,38 +1,32 @@
 language: python
-
 stages:
-    - test
-    - coverage
-
+- test
+- coverage
 install:
-    - pip install -r requirements.txt
-    - pip install -r requirements-dev.txt
+- pip install -r requirements.txt
+- pip install -r requirements-dev.txt
 script:
-    - python -m unittest tests
-
+- python -m unittest tests
 jobs:
-    include:
-        - python: 3.5
-        - python: "3.5-dev"
-        - python: 3.6
-        - python: "3.6-dev"
-        - python: "3.7-dev"
-        - stage: coverage
-          python: 3.5
-          script:
-            - coverage run --source=PdfSplitter -m unittest tests
-          after_success:
-            - coverage report -m
-            - coveralls
-
-        - stage: deploy
-          python: 3.5
-          script:
-              - echo "No test for deploy"
-          deploy:
-            provider: pypi
-            user: Nydareld
-            password:
-              secure: RQFVNDRsa2MnXB8yWVEBybzaV05jhzDddSbgFwWOsX1SiHz9SPjGfhzYbPq5X2wSAAE1rQNeoBWbQgTR8mcY3QX+ozBf2ID/kH2CKqeprw42U6aeu5DtRdlV68JzRbSDGDVrwTImHLAXV3F78qdXPG4AkzxJ+cGiP1Z0VKEba1UYluCp8UdFk5rsA/X/dqWvvVSMsS+Sq9FQm9Ojmm8nPttLkcFDN+sv+Jc0y2/2E+9sIrRg/0yT24zB4XW5d1k3B2qx9pdIKQnsAIIuuIBoJeaYpCTFm388cVfErS8yJLhpg2RNprf+b0CwPSAnIivjt/QfntwQ71GxZT6vllOPVVt0icSsKwYGCZvgwMGRTkTM+6cTRL6LK8XiAEyvZW5sbMgEG2Ew425Rm5SwkTaMin0Er5ArMrXYwEph6Jq1B2uSCEY6uYWlIo0OQhxaN+4as/Oed66oHUpXO9rT/2mei2Ya6VK0uHqlCA33ETeyC9BOdsQGnNAysLESLCwmv3ro3iFBUrswfUKqfEN4qxPNy31QZqQAGVgx0WtDQGn996SMrhI3i5BpCiavxygAkc+hx3L/kA0pudLZlV68TiCMVD0RPWDt8gTCvdJckIkscmHZPPH0R1iVzryhhnvmXMPTuLPpzSq+Y3UKzm8/+imalr2GL6S6GEmrehsXzEGMsOU=
-            on:
-              tags: true
+  include:
+  - python: 3.5
+  - python: 3.5-dev
+  - python: 3.6
+  - python: 3.6-dev
+  - python: 3.7-dev
+  - stage: coverage
+    python: 3.5
+    script:
+    - coverage run --source=PdfSplitter -m unittest tests
+    after_success:
+    - coverage report -m
+    - coveralls
+  - stage: deploy
+    python: 3.5
+    script:
+    - echo "No test for deploy"
+    deploy:
+      provider: pypi
+      user: Nydareld
+      password:
+        secure: SUNuHmkFI0nXSXnsnDuPl4FWAKDwd0/eWCmn0I96aj6s99jStuvPFEg0N/H33EEJX5HKgIjtjWeGixVQXzOZEALtAZx/Q8lmxR3iyIy4maEZ1DN9vL1ZSlJTGOKudQALx4vGpFImVOHLQj29NpqGZpXixzujQDJkhwiMLaNIDNpc9iY6y1e+ofmYd2JnBZ+dnFphO8a6526KdOd1mF8DoLZRBnAUTa6BEWROM9WEbE49BtIhGKL9xyJVr1lv3UY+4q3gtoVpK/X1ahnzZ3cvRzQyT4h1A/zxATEXmioo/hBO7+aq6gLStFvGc/eyAzYul3sWU/hs5AD5xOg4S9YH/GM0PhsQQglm7PjRr9l4lR1iYUnnM6kzB9Y3spn5H3Iziiq5+ff0m+eoxKgFdLEPcQNb4EgTYT4BX3qE4MqCBWivcPizWr86CAlCB0gWZaFWAWP02FDtHWwqmEZxEb7YpQIhfSHsvYR9wuQWgNCWHhecmpjCuJPSTvbs8lbbrbSQldewnvzH0d7ChXZSKNvhSgWptAi/J0+Ts5mFKnR3G4xq2j/hlRbrUe0F8LQlrUyhJjML+Y0wkPJ8fv+dL8DityWSMar3r8zcQulNaU4dKZMsGJg2gTNxPRg36lra2K0o760E9zuABfjp1uaouj1PcqDOI/GPixE2BMzdqw91R8M=
