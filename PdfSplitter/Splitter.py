@@ -26,7 +26,7 @@ class Splitter():
             self._splitOnePdf(splitInput["input"], output)
 
     def _downloadAndCache(self,fileKey):
-        s3Object = self._s3.Object(self._config.get("AWS_S3_BUCKET"),fileKey)
+        s3Object = self._s3.Object(self._config.get("S3_BUCKET"),fileKey)
         self._cachePdf[fileKey] = io.BytesIO(s3Object.get()["Body"].read())
 
 
