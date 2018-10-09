@@ -41,7 +41,7 @@ class TestSplitter(unittest.TestCase):
         self._letterPath = self.getCurrentPath()+"data/pdf/letter.pdf";
         self._numberPath = self.getCurrentPath()+"data/pdf/number.pdf";
 
-        self._bucket = self._s3.Bucket(self._config.get("AWS_S3_BUCKET"))
+        self._bucket = self._s3.Bucket(self._config.get("S3_BUCKET"))
 
         # uplaod sur le bucket de données de test
         self._bucket.upload_file(self._letterPath, 'letter.pdf')
@@ -49,8 +49,8 @@ class TestSplitter(unittest.TestCase):
 
     def test__init__(self):
         splitter = Splitter(self.getCurrentPath()+"data/splitterConfig.json")
-        for object in splitter._s3.Bucket(self._config.get("AWS_S3_BUCKET")).objects.all():
-            self.assertEqual( object.bucket_name, self._config.get("AWS_S3_BUCKET") )
+        for object in splitter._s3.Bucket(self._config.get("S3_BUCKET")).objects.all():
+            self.assertEqual( object.bucket_name, self._config.get("S3_BUCKET") )
 
     def test__downloadAndCache(self):
         splitter = Splitter(self.getCurrentPath()+"data/splitterConfig.json")

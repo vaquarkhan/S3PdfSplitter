@@ -18,7 +18,7 @@ class Splitter():
             aws_secret_access_key=self._config.get("AWS_SECRET_ACCESS_KEY"),
             aws_session_token= self._config.get("AWS_SESSION_TOKEN")
         )
-        self._bucket = self._s3.Bucket(self._config.get("AWS_S3_BUCKET"))
+        self._bucket = self._s3.Bucket(self._config.get("S3_BUCKET"))
 
 
     def split(self,splitInput):

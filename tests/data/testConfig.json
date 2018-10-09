@@ -1,7 +1,5 @@
 {
-    "aws" : {
-        "s3" : {
-            "bucket" : "bucket"
-        }
+    "s3" : {
+        "bucket" : "bucket"
     }
 }

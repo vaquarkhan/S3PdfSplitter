@@ -19,9 +19,9 @@ exemple config.json :
     "aws" : {
         "access_key_id" : "aws-acces-key",
         "secret_access_key" : "aws secret",
-        "s3" : {
-            "bucket" : "bucket"
-        }
+    },
+    "s3" : {
+        "bucket" : "bucket"
     }
 }
 ```
@@ -83,4 +83,4 @@ with unittest :
     python -m unittest
 
     # if you want to overide your test config :
-    AWS_S3_BUCKET=<your bucket> AWS_ACCESS_KEY_ID=<your key id> AWS_SECRET_ACCESS_KEY=<your key secret> python -m unittest
+    S3_BUCKET=<your bucket> AWS_ACCESS_KEY_ID=<your key id> AWS_SECRET_ACCESS_KEY=<your key secret> python -m unittest
