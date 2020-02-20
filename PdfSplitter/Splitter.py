@@ -2,6 +2,8 @@ from ConfigEnv import Config
 from PyPDF2 import PdfFileWriter, PdfFileReader
 import io
 import boto3
+import re
+from urllib.request import urlopen
 
 
 class Splitter():
@@ -26,8 +28,16 @@ class Splitter():
             self._splitOnePdf(splitInput["input"], output)
 
     def _downloadAndCache(self,fileKey):
-        s3Object = self._s3.Object(self._config.get("S3_BUCKET"),fileKey)
-        self._cachePdf[fileKey] = io.BytesIO(s3Object.get()["Body"].read())
+
+        if re.search("^https?://", fileKey) :
+            filedata = urlopen(fileKey)
+            dataStream = filedata.read()
+
+        else:
+            s3Object = self._s3.Object(self._config.get("S3_BUCKET"),fileKey)
+            dataStream = s3Object.get()["Body"].read()
+
+        self._cachePdf[fileKey] = io.BytesIO(dataStream)
 
 
     def _cachePdfOneFile(self,fileKey):

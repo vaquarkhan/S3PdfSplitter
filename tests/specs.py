@@ -70,6 +70,11 @@ class TestSplitter(unittest.TestCase):
         outputWriteStream.seek(0)
         self.assertEqual( self.pdfToStr( outputWriteStream ) , [ "b\n","c\n" ] )
 
+    def test__cachePdfOneHttp(self):
+        splitter = Splitter(self.getCurrentPath()+"data/splitterConfig.json")
+        splitter._cachePdfOneFile("https://www.decitre.fr/media/pdf/feuilletage/9/7/8/2/2/9/0/0/9782290059494.pdf")
+        writer = PdfFileWriter()
+        writer.addPage(splitter._cachePage["https://www.decitre.fr/media/pdf/feuilletage/9/7/8/2/2/9/0/0/9782290059494.pdf"][1])
 
     def test__getOnePage(self):
         splitter = Splitter(self.getCurrentPath()+"data/splitterConfig.json")
