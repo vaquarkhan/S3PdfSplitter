@@ -32,7 +32,8 @@ example data :
 {
     "input" : [
         "firstFile.pdf",
-        "secondFile.pdf"
+        "secondFile.pdf",
+        "http://urlFile.pdf"
     ],
     "output": [
         {
