@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='S3PdfSplitter',
-    version='1.1.0',
+    version='1.2.0',
     author="Théo \"Nydareld\" Guerin",
     author_email="theo.guerin.pro@gmail.com",
     description="Splitter de fichiers pdfs sur S3",
@@ -18,6 +18,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.5",
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
