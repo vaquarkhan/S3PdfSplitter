@@ -70,7 +70,7 @@ with virtualenv :
     virtualenv -p python3 .venv
 
     # activate venv
-    source .venv/bin/activate
+    source .venv/Scripts/activate
 
     # install dependancies
     pip install -r requirements.txt
